@@ -1,1 +1,66 @@
+---
+ - name: Expand Disk on VM
+   become: false
+   hosts: localhost
+   gather_facts: true
+ 
+---
+- name: Increase the size of a disk for a windows VM on VMWare
+  become: falso
+  hosts: localhost
+  gather_facts: false
+
+  # vars:
+  #   # drive_letter: E
+  #   # vm_name: greg-win-resize
+  #   # vcenter_username: "{{ gen1_user }}"
+  #   # vcenter_password: "{{ gen1_pword }}"
+  #   # datacenter_name: Central
+
+  tasks:
+  - name: Connect to VMWare and shutdown guest
+    community.vmware.vmware_guest:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      datacenter: "{{ datacenter_name }}"
+      validate_certs: no
+      name: "{{ inventory_hostname }}"
+      state: shutdownguest
+    delegate_to: localhost
+    failed_when: vm_shutdown.instance.hw_power_status != 'poweredOff' and vm_shutdown.changed == false
+    register: vm_shutdown
+
+  - name: Wait 15 seconds
+    ansible.builtin.pause:
+      seconds: 15
+
+  - name: Connect to VMWare and resize disk on VM
+    community.vmware.vmware_guest_disk:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      datacenter: "{{ datacenter_name }}"
+      validate_certs: no
+      name: "{{ vm_name }}"
+      disk:
+        - size_gb: 17
+          state: present
+          unit_number: 1
+          scsi_controller: 0
+          scsi_type: 'lsilogicsas'
+    delegate_to: localhost
+    register: disk_facts
+
+  - name: Connect to VMWare and boot up guest
+    community.vmware.vmware_guest:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      datacenter: "{{ datacenter_name }}"
+      validate_certs: no
+      name: "{{ vm_name }}"
+      state: poweredon
+    delegate_to: localhost
+#    register: disk_facts
 
