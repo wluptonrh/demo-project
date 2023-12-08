@@ -19,4 +19,8 @@
          parent_vm: "{{ testvm_1 }}"
          resource_pool: "{{ test_resource_001 }}"
       register: vm_clone
+<<<<<<< HEAD
       delegate_to: localhost
+=======
+      delegate_to: localhost
+>>>>>>> refs/remotes/origin/main
