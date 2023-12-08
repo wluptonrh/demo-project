@@ -2,7 +2,7 @@
  - name: Test vmware community functions
    become: false
    hosts: localhost
-   gather_facts: true 
+   gather_facts: true  
 
    tasks:
  
