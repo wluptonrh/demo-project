@@ -18,8 +18,5 @@
 
      - name: Print vm info to output
        debug:
-<<<<<<< HEAD
          msg: "{{ vm_info }}" 
-=======
-         msg: "{{ vm_info }}" 
->>>>>>> refs/remotes/origin/main
+
