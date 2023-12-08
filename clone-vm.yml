@@ -1,0 +1,22 @@
+---
+ - name: Clone vm
+   become: false
+   hosts: localhost
+   gather_facts: true
+   tasks: 
+
+    - name: Instant Clone a VM
+      community.vmware.vmware_guest_instant_clone:
+         hostname: "{{ vcenter_hostname }}"
+         username: "{{ vcenter_username }}"
+         password: "{{ vcenter_password }}"
+         validate_certs: false
+         folder: "{{ f0 }}"
+         datastore: "{{ rw_datastore }}"
+         datacenter: "{{ dc1 }}"
+         host: "{{ esxi1 }}"
+         name: "{{ Clone_vm }}"
+         parent_vm: "{{ testvm_1 }}"
+         resource_pool: "{{ test_resource_001 }}"
+      register: vm_clone
+      delegate_to: localhost
