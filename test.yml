@@ -4,7 +4,7 @@
    hosts: localhost
    gather_facts: true  
 
-   tasks:
+   tasks: 
  
      #Ensure you have a credential with your vmware credntials is defined
      - name: Gather info of all vms
