@@ -19,7 +19,7 @@
       password: "{{ vcenter_password }}"
       datacenter: "{{ datacenter_name }}"
       validate_certs: no
-      name: "{{ inventory_hostname }}"
+      name: "{{ vm_name }}"
       state: shutdownguest
     delegate_to: localhost
     #failed_when: vm_shutdown.instance.hw_power_status != 'poweredOff' and vm_shutdown.changed == false
