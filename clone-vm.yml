@@ -11,16 +11,12 @@
          username: "{{ vcenter_username }}"
          password: "{{ vcenter_password }}"
          validate_certs: false
-         folder: "{{ f0 }}"
-         datastore: "{{ rw_datastore }}"
-         datacenter: "{{ dc1 }}"
-         host: "{{ esxi1 }}"
-         name: "{{ Clone_vm }}"
-         parent_vm: "{{ testvm_1 }}"
-         resource_pool: "{{ test_resource_001 }}"
+         #folder: "{{ f0 }}"
+         datastore: "{{ vcenter_datastore }}"
+         datacenter: "{{ vcenter_dc }}"
+         #host: "{{ esxi1 }}"
+         name: "{{ clone_name }}"
+         parent_vm: "{{ parent_vm }}"
+         #resource_pool: "{{ test_resource_001 }}"
       register: vm_clone
-<<<<<<< HEAD
       delegate_to: localhost
-=======
-      delegate_to: localhost
->>>>>>> refs/remotes/origin/main
