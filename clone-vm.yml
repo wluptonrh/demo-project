@@ -14,7 +14,7 @@
          #folder: "{{ f0 }}"
          datastore: "{{ vcenter_datastore }}"
          datacenter: "{{ vcenter_datacenter }}"
-         #host: "{{ esxi1 }}"
+         host: "{{ vcenter_host }}"
          name: "{{ clone_name }}"
          parent_vm: "{{ parent_vm }}"
          #resource_pool: "{{ test_resource_001 }}"
