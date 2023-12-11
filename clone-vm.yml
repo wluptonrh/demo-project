@@ -13,7 +13,7 @@
          validate_certs: false
          #folder: "{{ f0 }}"
          datastore: "{{ vcenter_datastore }}"
-         datacenter: "{{ vcenter_dc }}"
+         datacenter: "{{ vcenter_datacenter }}"
          #host: "{{ esxi1 }}"
          name: "{{ clone_name }}"
          parent_vm: "{{ parent_vm }}"
