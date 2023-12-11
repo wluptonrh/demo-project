@@ -17,6 +17,7 @@
          host: "{{ vcenter_host }}"
          name: "{{ clone_name }}"
          parent_vm: "{{ parent_vm }}"
+         folder: "{{ vsphere_folder }}"
          #resource_pool: "{{ test_resource_001 }}"
       register: vm_clone
       delegate_to: localhost
