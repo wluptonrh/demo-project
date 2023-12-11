@@ -40,7 +40,7 @@
       disk:
         - size_gb: "{{ vm_disk_gb }}"
           state: present
-          unit_number: 0
+          unit_number: 1
           scsi_controller: 0
           scsi_type: 'lsilogicsas'
     delegate_to: localhost
