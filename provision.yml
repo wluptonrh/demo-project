@@ -17,8 +17,8 @@
         template: node1
         hardware:
           memory_gb: "{{ mem_gb }}"
-          num_cpus: "{{ num_cpu }}"
-          scsi: paravirtual
+          #num_cpus: "{{ num_cpu }}"
+          #scsi: paravirtual
         # disk:
         # - size_gb: "{{ disk_gb }}"
         #   type: thin
