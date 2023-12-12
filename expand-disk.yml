@@ -107,7 +107,7 @@
 
   - name: expand lvol
     lvol:
-      vg: ol
+      vg: rhel
       lv: root
       size: +100%FREE
     become: yes
@@ -120,7 +120,7 @@
 
   - name: grow xfs
     filesystem:
-      dev: /dev/mapper/ol-root
+      dev: /dev/mapper/rhel-root
       fstype: xfs
       resizefs: yes
     become: yes

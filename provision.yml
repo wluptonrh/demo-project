@@ -29,4 +29,6 @@
     - name: Show vm details
       debug:
         msg: "{{ deploy_vm }}"
+
+      
       
