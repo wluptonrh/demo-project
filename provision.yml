@@ -11,6 +11,7 @@
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
         folder: "{{ folder }}"
+        datacenter: "{{ datacenter }}"
         name: "{{ vm_name }}"
         state: poweredon
         template: node1
