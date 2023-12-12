@@ -1,7 +1,7 @@
 ---
 - name: Increase the size of a disk for a Linux VM on VMWare
   become: false
-  hosts: test
+  hosts: localhost
   gather_facts: false
 
   # vars:
@@ -58,80 +58,6 @@
     delegate_to: localhost
 #    register: disk_facts
 
-  - name: Wait 15 seconds
-    ansible.builtin.pause:
-      seconds: 15
-
-  - name: Debug disk info
-    debug: 
-      var: hostvars[inventory_hostname]["ansible_devices"]
-
-  - name: fail if sda3 already exists
-    fail:
-      msg: sda3 aready exists. Aborting!
-    when: hostvars[inventory_hostname]["ansible_devices"]["sda"]["partitions"]["sda3"] is defined
-    tags:
-      - fdisk
-
-  - name: Partition new disk
-    shell: echo -e "n\np\n3\n\n\nt\n3\n8e\nw\n" | sudo fdisk /dev/sda
-    args:
-      executable: /bin/bash
-    become: yes
-    ignore_errors: yes
-    tags:
-      - fdisk
-
-  - name: partprobe
-    shell: partprobe
-    become: yes
-    tags:
-      - fdisk
-
-  - name: update facts
-    setup:
-
-  - name: fail when sda3 does not exist
-    fail:
-      msg: sda3 was created successfully
-    when: hostvars[inventory_hostname]["ansible_devices"]["sda"]["partitions"]["sda3"] is not defined
-
-  - name: extend volume group onto sda3 (will take care of pvcreate) 
-    lvg: 
-      vg: ol
-      pvs: /dev/sda2,/dev/sda3
-    become: yes
-    register: lvg
-
-  - name: debug lvg
-    debug:
-      var: lvg
-      verbosity: 1
-
-  - name: expand lvol
-    lvol:
-      vg: rhel
-      lv: root
-      size: +100%FREE
-    become: yes
-    register: lvol
-
-  - name: debug lvol
-    debug:
-      var: lvol
-      verbosity: 1
-
-  - name: grow xfs
-    filesystem:
-      dev: /dev/mapper/rhel-root
-      fstype: xfs
-      resizefs: yes
-    become: yes
-    register: grow_xfs
-
-  - name: debug grow_xfs
-    debug:
-      var: grow_xfs
 
 
 
