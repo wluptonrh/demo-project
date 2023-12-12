@@ -18,10 +18,10 @@
           memory_gb: "{{ mem_gb }}"
           num_cpus: "{{ num_cpu }}"
           scsi: paravirtual
-        disk:
-        - size_gb: "{{ disk_gb }}"
-          type: thin
-          datastore: WorkloadDatastore
+        # disk:
+        # - size_gb: "{{ disk_gb }}"
+        #   type: thin
+        #   datastore: WorkloadDatastore
       register: deploy_vm
       delegate_to: localhost
 
