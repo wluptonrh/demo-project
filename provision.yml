@@ -22,7 +22,7 @@
         - size_gb: "{{ disk_gb }}"
           type: thin
           datastore: WorkloadDatastore
-      register: "{{ deploy_vm }}"
+      register: deploy_vm
       delegate_to: localhost
 
     - name: Show vm details
