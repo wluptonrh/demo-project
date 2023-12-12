@@ -58,6 +58,9 @@
     delegate_to: localhost
 #    register: disk_facts
 
+  - name: Wait 15 seconds
+    ansible.builtin.pause:
+      seconds: 15
 
   - name: Debug disk info
     debug: 
