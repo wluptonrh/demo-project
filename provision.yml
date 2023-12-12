@@ -5,35 +5,25 @@
    gather_facts: true
    tasks: 
 
-    - name: Create a virtual machine on given ESXi hostname
+    - name: Create a virtual machine from a template
       community.vmware.vmware_guest:
         hostname: "{{ vcenter_hostname }}"
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
-        folder: /DC1/vm/
-        name: test_vm_0001
+        folder: "{{ folder }}"
+        name: "{{ vm_name }}"
         state: poweredon
-        guest_id: "{{ vm_name }}"
-        # This is hostname of particular ESXi server on which user wants VM to be deployed
-        #esxi_hostname: "{{ esxi_hostname }}"
+        template: node1
+        hardware:
+          memory_gb: "{{ mem_gb }}"
+          num_cpus: "{{ num_cpu }}"
+          scsi: paravirtual
         disk:
         - size_gb: "{{ disk_gb }}"
           type: thin
           datastore: WorkloadDatastore
-        hardware:
-          memory_gb: "{{ memory_gb }}"
-          num_cpus: "{{ num_cpu }}"
-          scsi: paravirtual
-        # networks:
-        # - name: VM Network
-        #   mac: aa:bb:dd:aa:00:14
-        #   ip: 10.10.10.100
-        #   netmask: 255.255.255.0
-        #   device_type: vmxnet3
-        wait_for_ip_address: true
-        wait_for_ip_address_timeout: 600
+      register: "{{ deploy_vm }}"
       delegate_to: localhost
-      register: deploy_vm
 
     - name: Show vm details
       debug:
