@@ -16,7 +16,7 @@
         state: poweredon
         template: node1
         hardware:
-          memory_mb: "{{ mem_gb }}"
+          memory_mb: "{{ mem_mb }}"
           num_cpus: "{{ num_cpu }}"
           #scsi: paravirtual
         disk:
